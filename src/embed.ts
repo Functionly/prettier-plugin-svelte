@@ -108,7 +108,7 @@ function embedTag(
     }
     node.attributes = node.attributes.filter(n => n !== contentAttribute);
 
-    const finalContent = tag === 'style' ? content.trim() : textToDoc(content, { parser });
+    const finalContent = tag === 'style' ? content.trim().replace(/  /gm, '\t') : textToDoc(content, { parser });
 
     return group(
         concat([
