@@ -108,13 +108,15 @@ function embedTag(
     }
     node.attributes = node.attributes.filter(n => n !== contentAttribute);
 
+    const finalContent = tag === 'style' ? content.trim() : textToDoc(content, { parser });
+
     return group(
         concat([
             '<',
             tag,
             indent(group(concat(path.map(childPath => childPath.call(print), 'attributes')))),
             '>',
-            indent(concat([hardline, nukeLastLine(textToDoc(content, { parser }))])),
+            indent(concat([hardline, nukeLastLine(finalContent)])),
             hardline,
             '</',
             tag,
